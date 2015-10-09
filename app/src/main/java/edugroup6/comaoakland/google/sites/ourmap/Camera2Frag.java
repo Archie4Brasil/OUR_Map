@@ -8,5 +8,5 @@ import android.view.View;
  */
 public class Camera2Frag extends Fragment implements View.OnClickListener,
         FragmentCompat.OnRequestPermissionsREsutltCallback{
-    
+
 }
