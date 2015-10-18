@@ -8,6 +8,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.OrientationEventListener;
 import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -28,8 +29,6 @@ public class MainActivity extends ActionBarActivity {
 
         ArDisplayView arDisplay = new ArDisplayView(this, this);
         arViewPane.addView(arDisplay);
-
-
     }
 
     @Override
@@ -54,12 +53,16 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
+
     public class ArDisplayView extends SurfaceView implements SurfaceHolder.Callback
     {
         public static final String DEBUG_TAG = "ArDisplayView Log";
         Camera mCamera;
         SurfaceHolder mHolder;
         Activity mActivity;
+        private int currentSetRotation;
+        OrientationEventListener orientationListener;
 
         public ArDisplayView(Context context, Activity activity)
         {
@@ -69,30 +72,60 @@ public class MainActivity extends ActionBarActivity {
             mHolder = getHolder();
             mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
             mHolder.addCallback(this);
+            orientationListener = createOrientationListener();
+            currentSetRotation = -1;
 
+        }
+
+        private OrientationEventListener createOrientationListener() {
+            return new OrientationEventListener(mActivity) {
+                public void onOrientationChanged(int orientation) {
+                    try {
+                        if (orientation != OrientationEventListener.ORIENTATION_UNKNOWN) {
+                            setCameraDisplayOrientation(mActivity.getWindowManager().
+                                    getDefaultDisplay().getRotation());
+                        }
+                    } catch (Exception e) {
+                        Log.e(DEBUG_TAG, "Error while onOrientationChanged", e);
+                    }
+                }
+            };
+        }
+
+        public void setCameraDisplayOrientation(int displayRotation) {
+            if(displayRotation != currentSetRotation) {
+                int degrees = 0;
+                switch (displayRotation) {
+                    case Surface.ROTATION_0: degrees = 0; break;
+                    case Surface.ROTATION_90: degrees = 90; break;
+                    case Surface.ROTATION_180: degrees = 180; break;
+                    case Surface.ROTATION_270: degrees = 270; break;
+                }
+
+                Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
+                Camera.getCameraInfo(Camera.CameraInfo.CAMERA_FACING_BACK, cameraInfo);
+                displayRotation = (cameraInfo.orientation - degrees + 360) % 360;
+
+                currentSetRotation = displayRotation;
+                mCamera.setDisplayOrientation(displayRotation);
+                Log.e(DEBUG_TAG,"For displayRotation "+degrees+" we set a camera rotation" +
+                        " of "+displayRotation);
+            }
         }
 
         public void surfaceCreated(SurfaceHolder holder) {
             mCamera = Camera.open();
-
-            Camera.CameraInfo info = new Camera.CameraInfo();
-            Camera.getCameraInfo(Camera.CameraInfo.CAMERA_FACING_BACK, info);
-            int rotation = mActivity.getWindowManager().getDefaultDisplay().getRotation();
-            int degrees = 0;
-            switch (rotation) {
-                case Surface.ROTATION_0: degrees = 0; break;
-                case Surface.ROTATION_90: degrees = 90; break;
-                case Surface.ROTATION_180: degrees = 180; break;
-                case Surface.ROTATION_270: degrees = 270; break;
-            }
-            mCamera.setDisplayOrientation((info.orientation - degrees + 360) % 360);
 
             try {
                 mCamera.setPreviewDisplay(mHolder);
             } catch (IOException e) {
                 Log.e(DEBUG_TAG, "surfaceCreated exception: ", e);
             }
+
+            orientationListener.enable();
         }
+
+
 
         public void surfaceChanged(SurfaceHolder holder, int format, int width, int height)
         {
@@ -109,15 +142,15 @@ public class MainActivity extends ActionBarActivity {
 
             mCamera.setParameters(params);
             mCamera.startPreview();
+
+
         }
 
         public void surfaceDestroyed(SurfaceHolder holder) {
             mCamera.stopPreview();
             mCamera.release();
+
+            orientationListener.disable();
         }
     }
-
-    
-
-
 }
