@@ -13,11 +13,18 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.FrameLayout;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.places.Places;
+
 import java.io.IOException;
 import java.util.List;
 
 @SuppressWarnings( "deprecation" )
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements GoogleApiClient.OnConnectionFailedListener {
+private GoogleApiClient mGoogleApiClient;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +36,25 @@ public class MainActivity extends ActionBarActivity {
         ArDisplayView arDisplay = new ArDisplayView(this, this);
         arViewPane.addView(arDisplay);
 
+        mGoogleApiClient = new GoogleApiClient
+                .Builder(this)
+                .addApi(Places.GEO_DATA_API)
+                .addApi(Places.PLACE_DETECTION_API)
+                .addOnConnectionFailedListener(this)
+                .build();
 
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+        mGoogleApiClient.connect();
+    }
+
+    @Override
+    protected void onStop(){
+        mGoogleApiClient.disconnect();
+        super.onStop();
     }
 
     @Override
@@ -117,7 +142,12 @@ public class MainActivity extends ActionBarActivity {
         }
     }
 
-    
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+
+
+    }
+
 
 
 }
