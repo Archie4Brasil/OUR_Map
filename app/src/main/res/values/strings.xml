@@ -3,4 +3,9 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
+    <string name="picture">Picture</string>
+    <string name="description_info">Info</string>
+    <string name="request_permission">This sample needs Camera Permission.</string>
+    <string name="camera_error">This Device does not support Camera2 API.</string>
 </resources>
