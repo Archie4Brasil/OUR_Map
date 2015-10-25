@@ -13,6 +13,7 @@ import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -44,6 +45,8 @@ private GoogleApiClient mGoogleApiClient;
                 .addOnConnectionFailedListener(this)
                 .build();
 
+        String nearestPlace = Places.PlaceDetectionApi.getCurrentPlace(mGoogleApiClient, null).toString();
+        Toast.makeText(this, nearestPlace, Toast.LENGTH_LONG).show();
     }
 
     @Override
