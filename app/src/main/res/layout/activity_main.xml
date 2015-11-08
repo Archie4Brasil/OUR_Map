@@ -3,7 +3,26 @@
     android:id="@+id/ar_view_pane"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@drawable/mapbkgdtst">
 
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="126dp"
+        android:text="Camera"
+        android:id="@+id/button"
+        android:layout_gravity="left|bottom"
+        android:onClick="sendToCamera"
+        android:typeface="serif"
+        android:textColor="#fe000000"
+        android:textColorHighlight="#ffe7ff1f"
+        />
+    <ImageView
+        android:layout_width="244dp"
+        android:layout_height="157dp"
+        android:id="@+id/imageView"
+        android:layout_gravity="center_horizontal|top"
+        android:src="@drawable/ou"/>
 
 </FrameLayout>

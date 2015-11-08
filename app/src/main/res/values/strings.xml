@@ -8,4 +8,7 @@
     <string name="description_info">Info</string>
     <string name="request_permission">This sample needs Camera Permission.</string>
     <string name="camera_error">This Device does not support Camera2 API.</string>
+    <string name="title_activity_camera_ou">CameraOU</string>
+    <string name="title_activity_locater_ou">LocaterOU</string>
+    <string name="title_activity_splashscrn">splashscrn</string>
 </resources>
