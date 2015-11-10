@@ -18,11 +18,5 @@
         android:textColor="#fe000000"
         android:textColorHighlight="#ffe7ff1f"
         />
-    <ImageView
-        android:layout_width="244dp"
-        android:layout_height="157dp"
-        android:id="@+id/imageView"
-        android:layout_gravity="center_horizontal|top"
-        android:src="@drawable/ou"/>
 
 </FrameLayout>
