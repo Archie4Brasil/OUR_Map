@@ -11,4 +11,5 @@
     <string name="title_activity_camera_ou">CameraOU</string>
     <string name="title_activity_locater_ou">LocaterOU</string>
     <string name="title_activity_splashscrn">splashscrn</string>
+    <string name="title_activity_place_filter">PlaceFilter</string>
 </resources>

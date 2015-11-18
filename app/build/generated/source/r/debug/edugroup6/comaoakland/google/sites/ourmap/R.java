@@ -1319,12 +1319,13 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f0c002e;
         public static final int action_mode_bar_stub=0x7f0c002d;
         public static final int action_mode_close_button=0x7f0c0020;
-        public static final int action_settings=0x7f0c0041;
+        public static final int action_settings=0x7f0c0042;
         public static final int activity_chooser_view_content=0x7f0c0021;
         public static final int always=0x7f0c0016;
         public static final int ar_view_pane=0x7f0c003f;
         public static final int beginning=0x7f0c0013;
         public static final int button=0x7f0c0040;
+        public static final int button2=0x7f0c0041;
         public static final int checkbox=0x7f0c0029;
         public static final int collapseActionView=0x7f0c0017;
         public static final int decor_content_parent=0x7f0c002f;
@@ -1403,8 +1404,9 @@ containing a value of this type.
         public static final int activity_camera_ou=0x7f040017;
         public static final int activity_locater_ou=0x7f040018;
         public static final int activity_main=0x7f040019;
-        public static final int activity_splashscrn=0x7f04001a;
-        public static final int support_simple_spinner_dropdown_item=0x7f04001b;
+        public static final int activity_place_filter=0x7f04001a;
+        public static final int activity_splashscrn=0x7f04001b;
+        public static final int support_simple_spinner_dropdown_item=0x7f04001c;
     }
     public static final class menu {
         public static final int menu_camera_ou=0x7f0d0000;
@@ -1441,7 +1443,8 @@ containing a value of this type.
         public static final int request_permission=0x7f060016;
         public static final int title_activity_camera_ou=0x7f060017;
         public static final int title_activity_locater_ou=0x7f060018;
-        public static final int title_activity_splashscrn=0x7f060019;
+        public static final int title_activity_place_filter=0x7f060019;
+        public static final int title_activity_splashscrn=0x7f06001a;
     }
     public static final class style {
         /**  Customize your theme here. 

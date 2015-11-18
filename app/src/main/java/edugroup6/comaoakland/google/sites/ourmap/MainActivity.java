@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 
 @SuppressWarnings( "deprecation" )
 public class MainActivity extends ActionBarActivity {
@@ -51,6 +52,11 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
+    public void openFilterList(View view){
+        Intent intent = new Intent(this,edugroup6.comaoakland.google.sites.ourmap.PlaceFilter.class);
+
+        startActivity(intent);
+    }
     
 
 
